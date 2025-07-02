@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d6efd">
+  <title>exNotion: Notion/Obsidian Link Cleaner</title>
+  <link rel="manifest" href="manifest.json">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="favicon.svg">
+  <style>
+    body { background: #f8f9fa; }
+    .drop-area {
+      border: 2px dashed #0d6efd;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      color: #6c757d;
+      background: #fff;
+      margin-bottom: 2rem;
+      transition: background 0.2s;
+    }
+    .drop-area.dragover {
+      background: #e7f1ff;
+      color: #0d6efd;
+    }
+    .progress-area {
+      min-height: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h1 class="mb-4 text-primary">exNotion: Clean up your Notion workspace export</h1>
+    <div class="alert alert-info mb-4">
+      <strong>This tool will:</strong><br>
+      - Make file and folder names readable by removing Notion's nasty hash codes.<br>
+      - Update all links in your markdown files to use the new, clean human-readable folder and filenames.<br>
+      - Help with migration to Obsidian, Logseq, or any other markdown-based note-taking app.<br>
+      <br>
+      <span class="text-success">All processing is done <strong>locally</strong> in your browser. <strong>No information is ever sent to any server.</strong></span>
+    </div>
+    <div class="card mb-4">
+      <div class="card-header bg-light"><strong>How to use</strong></div>
+      <div class="card-body">
+        <ol class="mb-0">
+          <li>In <strong>Notion</strong>: Go to <b>Settings</b> → <b>General</b> → <b>Export Content</b> → choose <b>Markdown &amp; CSV</b>.</li>
+          <li>Upload the exported zip file here and process it.</li>
+          <li>Download the cleaned zip file with readable names and fixed links.</li>
+        </ol>
+      </div>
+    </div>
+    <div id="drop-area" class="drop-area mb-3">
+      <p class="mb-2">Drag &amp; drop your exported <strong>zip</strong> file here</p>
+      <p class="mb-2">or</p>
+      <input type="file" id="fileElem" accept=".zip" class="form-control w-auto mx-auto" style="display:inline-block;" />
+    </div>
+    <div class="progress-area mb-3" id="progress-area"></div>
+    <button id="downloadBtn" class="btn btn-success" style="display:none;">Download Cleaned Zip</button>
+    <div class="text-center text-muted small mt-2">
+      Disclaimer: This tool is not affiliated with or endorsed by Notion Labs, Inc. It is provided "as is" without warranty of any kind. The author is not responsible for any damages or inconvenience caused by the use of this tool. Use at your own risk. By using this app, you agree that the author cannot be held liable for any issues arising from its use.
+    </div>
+    <footer class="mt-5 text-muted small">&copy; 2025 exNotion | All processing is done locally in your browser.</footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html> 

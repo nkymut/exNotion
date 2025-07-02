@@ -1,0 +1,16 @@
+{
+  "name": "exNotion: Notion/Obsidian Link Cleaner",
+  "short_name": "exNotion",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#0d6efd",
+  "description": "Clean up Notion/Obsidian exports by removing hash folders and fixing links, all in your browser.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+} 
