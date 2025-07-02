@@ -86,26 +86,26 @@ function updateLinksInMarkdown(content, filePath) {
   // Remove hashes from the end of filenames in links (e.g., filename%20HASH.md -> filename.md)
   const filenameHashPattern = /([^\s\)]+?)(%20|\s)[0-9a-fA-F]{32}(\.md|\.markdown)/g;
   updated = updated.replace(filenameHashPattern, (match, filename, space, extension) => {
-    // Decode URL encoding in filename
-    const cleanFilename = decodeURIComponent(filename.replace(/%20/g, ' '));
+    // Keep URL encoding for spaces in filenames
+    const cleanFilename = filename.replace(/\s/g, '%20');
     return `${cleanFilename}${extension}`;
   });
   
   // Remove hashes from anywhere in filenames in links (e.g., filename%20HASH%20more.md -> filename more.md)
   const filenameHashAnywherePattern = /([^\s\(\)\[\]]+?)(%20|\s)[0-9a-fA-F]{32}([^\s\(\)\[\]]*)(\.md|\.markdown)/g;
   updated = updated.replace(filenameHashAnywherePattern, (match, beforeHash, space, afterHash, extension) => {
-    // Decode URL encoding and clean up
-    const cleanBefore = decodeURIComponent(beforeHash.replace(/%20/g, ' '));
-    const cleanAfter = afterHash ? decodeURIComponent(afterHash.replace(/%20/g, ' ')) : '';
+    // Keep URL encoding for spaces
+    const cleanBefore = beforeHash.replace(/\s/g, '%20');
+    const cleanAfter = afterHash ? afterHash.replace(/\s/g, '%20') : '';
     return `${cleanBefore}${cleanAfter}${extension}`;
   });
   
-  // Comprehensive pattern: Remove hashes from filenames in markdown links and decode URL encoding
+  // Comprehensive pattern: Remove hashes from filenames in markdown links and keep URL encoding
   const comprehensiveHashPattern = /\[([^\]]+)\]\(([^)]+?)(%20|\s)[0-9a-fA-F]{32}([^)]*?)(\.md|\.markdown)\)/g;
   updated = updated.replace(comprehensiveHashPattern, (match, linkText, pathBefore, space, pathAfter, extension) => {
-    // Clean and decode the path
-    const cleanPathBefore = decodeURIComponent(pathBefore.replace(/%20/g, ' '));
-    const cleanPathAfter = pathAfter ? decodeURIComponent(pathAfter.replace(/%20/g, ' ')) : '';
+    // Keep URL encoding for spaces in paths
+    const cleanPathBefore = pathBefore.replace(/\s/g, '%20');
+    const cleanPathAfter = pathAfter ? pathAfter.replace(/\s/g, '%20') : '';
     const cleanPath = `${cleanPathBefore}${cleanPathAfter}${extension}`;
     return `[${linkText}](${cleanPath})`;
   });
